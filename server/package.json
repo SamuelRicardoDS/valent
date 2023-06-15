@@ -18,7 +18,11 @@
     "dev": "nodemon --exec ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "@prisma/client": "^4.15.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "prisma": "^4.15.0"
   },
   "repository": "https://github.com/SamuelRicardoDS/valent.git",
   "author": "SamuelRicardoDS <samuelricardods@gmail.com>"

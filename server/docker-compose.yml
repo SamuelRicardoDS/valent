@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    container_name: "db_postgres"
+    restart: always
+    environment:
+      POSTGRES_USER: valent
+      POSTGRES_PASSWORD: valent
+      POSTGRES_DB: valentdb
+    volumes:
+      - ./backupDatabase:/var/lib/postgresql/data
+volumes:
+  backupDatabase:
