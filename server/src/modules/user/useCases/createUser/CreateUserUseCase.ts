@@ -1,7 +1,7 @@
 import { IUserRepository } from "../../repositories/IUserRepository";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 
-export class CreateUserUseCase {
+class CreateUserUseCase {
   constructor(
     private userRepository: IUserRepository
   ) {}
@@ -20,3 +20,5 @@ export class CreateUserUseCase {
     await this.userRepository.create(data);
   }
 }
+
+export { CreateUserUseCase }
