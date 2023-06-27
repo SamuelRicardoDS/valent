@@ -7,13 +7,13 @@ const CarpeWomanContainer = styled.div`
   flex-direction: column;
   left: 0;
   bottom: 0;
-  justify-content: flex-end;  
+  justify-content: flex-end;
+  width: 30%; 
 `;
 
 export const CarpeWomanComponent = () => {
     return (
         <CarpeWomanContainer>
-            <h1>CarpeWomanComponent</h1>
             <img src={carpeWoman} alt="carpeWoman" />
         </CarpeWomanContainer>
     )

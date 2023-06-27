@@ -1,5 +1,5 @@
 import { Routes as ValentRoutes , Route } from "react-router-dom";
-import { Home } from "./pages/home/Home";
+import { Home } from "./pages/Home";
 import { Main } from "./pages/Main";
 
 export const Routes = () => {

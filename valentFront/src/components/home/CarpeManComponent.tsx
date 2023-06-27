@@ -8,6 +8,7 @@ const CarpeManContainer = styled.div`
   right: 0;
   bottom: 0;
   justify-content: flex-end;  
+  z-index: 1;
 `;
 
 export const CarpeManComponent = () => {
