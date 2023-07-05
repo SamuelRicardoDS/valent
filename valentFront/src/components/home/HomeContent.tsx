@@ -34,7 +34,7 @@ const SignUpButton = styled.button`
 export const HomeContent = () => {
   const navigate = useNavigate()
   const handleClick = () => {
-    navigate('/main')
+    navigate('/sign-up')
   }
   return (
     <HomeContentContainer>
