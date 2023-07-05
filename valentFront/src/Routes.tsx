@@ -8,7 +8,7 @@ export const Routes = () => {
     <ValentRoutes>
       <Route path="/" Component={Home} />
       <Route path="/main" Component={Main} />
-      <Route path="/sign-up" Component={SignUp} />
+      <Route path="/user/sign-up" Component={SignUp} />
     </ValentRoutes>
   );
 }

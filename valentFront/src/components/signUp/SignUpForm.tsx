@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import { api } from '../../services/api';
 
 const SignUpFormContainer = styled.form`
   position: fixed;
@@ -58,19 +60,49 @@ const SignUpButtonContainer = styled.div`
 `;
 
 export const SignUpForm = () => {
+  const [name, setName] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (name === 'name') {
+      setName(value)
+    } else if (name === 'password') {
+      setPassword(value)
+    } else if (name === 'email') {
+      setEmail(value)
+    }
+  }
+
+  const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(`name: ${name}, password: ${password}, email:${email}`)
+    api.post('/user/sign-up', {
+      name,
+      password,
+      email
+    }).then((response) => {
+      console.log(response)
+    }
+    ).catch((error) => {
+      console.log(error)
+    }
+    )
+  }
   return (
     <div>
-      <SignUpFormContainer>
+      <SignUpFormContainer onSubmit={handleSignUp}>
         <NameAndPasswordContainer>
           <NameContainer>
-            <SignUpFormInput placeholder="Name" type="text" id="name" name="name" />
+            <SignUpFormInput placeholder="Name" type="text" id="name" name="name" onChange={handleChange}/>
           </NameContainer>
           <PasswordContainer>
-            <SignUpFormInput placeholder="Password" type="password" id="password" name="password" />
+            <SignUpFormInput placeholder="Password" type="password" id="password" name="password" onChange={handleChange}/>
           </PasswordContainer>
         </NameAndPasswordContainer>
         <EmailContainer>
-          <SignUpFormInput placeholder="Email" type="email" id="email" name="email" />
+          <SignUpFormInput placeholder="Email" type="email" id="email" name="email" onChange={handleChange}/>
         </EmailContainer>
         <SignUpButtonContainer>
           <SignUpButton type="submit">Sign Up</SignUpButton>

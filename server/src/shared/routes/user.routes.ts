@@ -11,6 +11,6 @@ const createUserUseCase = new CreateUserUseCase(prismaUserRepository);
 
 const createUserController = new CreateUserController(createUserUseCase);
 
-userRoutes.post('/', (request, response) => {
+userRoutes.post('/sign-up', (request, response) => {
   return createUserController.handle(request, response);
 });
