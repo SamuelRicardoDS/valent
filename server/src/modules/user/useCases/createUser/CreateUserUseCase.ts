@@ -1,5 +1,6 @@
 import { IUserRepository } from "../../repositories/IUserRepository";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
+import bcrypt from 'bcryptjs';
 
 class CreateUserUseCase {
   constructor(
@@ -17,6 +18,9 @@ class CreateUserUseCase {
       throw new Error("User already exists");
     }
     
+    const hashPassword = await bcrypt.hash(data.password, 8);
+    data.password = hashPassword;
+
     await this.userRepository.create(data);
   }
 }
