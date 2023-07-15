@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useState } from 'react';
+import { api } from '../../services/api';
 
 const SignUpFormContainer = styled.form`
   position: fixed;
@@ -29,11 +31,39 @@ const SignInButton = styled.button`
 `;
 
 export const SignInForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (name === 'email') {
+      setEmail(value);
+    }
+    if (name === 'password') {
+      setPassword(value);
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = {
+      email,
+      password
+    }
+    const response = await api.post('/user/sign-in', data)
+    .then((response) => {
+      console.log(response)
+    }
+    ).catch((error) => {
+      console.log(error)
+    })
+    console.log(response);
+  }
     return (
-        <SignUpFormContainer>
-            <SignUpFormInput placeholder="Email" />
-            <SignUpFormInput placeholder="Password" />
-            <SignInButton>Sign In</SignInButton>
+        <SignUpFormContainer onSubmit={handleSubmit}>
+            <SignUpFormInput placeholder="Email" name='email' onChange={handleChange}/>
+            <SignUpFormInput placeholder="Password" name='password' onChange={handleChange}/>
+            <SignInButton type='submit'>Sign In</SignInButton>
         </SignUpFormContainer>
     )
 }
