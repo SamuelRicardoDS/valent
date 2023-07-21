@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   position: fixed;
@@ -23,8 +24,12 @@ const NavigationContainer = styled.div`
   margin-right: 3rem;
 `;
 
-const NavItem = styled.h1`
+const NavButton = styled.button`
+  background: transparent;
+  border: none;
+  cursor: pointer;
   color: white;
+  font-size: xx-large;
 `;
 
 const Line = styled.div`
@@ -38,13 +43,20 @@ const Line = styled.div`
 `;
 
 export const Header = () => {
+  const navigate = useNavigate()
+  const handleHome = () => {
+    navigate('/')
+  }
+  const handleLogin = () => {
+    navigate('/user/sign-in')
+  }
   return (
     <div>
       <HeaderContainer>
         <Logo>Valent</Logo>
         <NavigationContainer>
-          <NavItem>Home</NavItem>
-          <NavItem>Login</NavItem>
+          <NavButton onClick={handleHome}>Home</NavButton>
+          <NavButton onClick={handleLogin}>Login</NavButton>
         </NavigationContainer>
       </HeaderContainer>
       <Line />
