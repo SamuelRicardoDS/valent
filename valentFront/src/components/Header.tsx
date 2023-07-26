@@ -6,8 +6,6 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 60px;
 `;
@@ -43,7 +41,9 @@ const Line = styled.div`
 `;
 
 export const Header = () => {
+  
   const navigate = useNavigate()
+
   const handleHome = () => {
     navigate('/')
   }

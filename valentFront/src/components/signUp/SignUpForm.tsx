@@ -78,11 +78,13 @@ export const SignUpForm = () => {
   const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(`name: ${name}, password: ${password}, email:${email}`)
-    api.post('/user/sign-up', {
+    const data = {
       name,
       password,
       email
-    }).then((response) => {
+    }
+    api.post('/user/sign-up', data)
+    .then((response) => {
       console.log(response)
     }
     ).catch((error) => {
