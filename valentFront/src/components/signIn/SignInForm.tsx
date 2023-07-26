@@ -49,16 +49,17 @@ export const SignInForm = () => {
     const data = {
       email,
       password
+    };
+  
+    try {
+      const response = await api.post('/user/sign-in', data);
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+      console.log(response.data); 
+    } catch (error) {
+      console.log(error); 
     }
-    const response = await api.post('/user/sign-in', data)
-    .then((response) => {
-      console.log(response)
-    }
-    ).catch((error) => {
-      console.log(error)
-    })
-    console.log(response);
-  }
+  };
     return (
         <SignUpFormContainer onSubmit={handleSubmit}>
             <SignUpFormInput placeholder="Email" name='email' onChange={handleChange}/>
