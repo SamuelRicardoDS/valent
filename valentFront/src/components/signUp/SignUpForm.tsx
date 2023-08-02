@@ -86,6 +86,7 @@ export const SignUpForm = () => {
     api.post('/user/sign-up', data)
     .then((response) => {
       console.log(response)
+      alert('User created successfully!')
     }
     ).catch((error) => {
       console.log(error)

@@ -1,9 +1,12 @@
-const Main = () => {
+import { InRelationship } from "../components/main/InRelationship";
+import { NotInRelationship } from "../components/main/NotInRelationship";
+
+
+export const Main = () => {
+    const isInRelationship = false;
     return (
         <div>
-            <h1>Main</h1>
+            {isInRelationship ? <InRelationship /> : <NotInRelationship />}
         </div>
     )
 }
-
-export { Main };
