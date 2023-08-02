@@ -61,6 +61,7 @@ export const SignInForm = () => {
       navigate('/main');
     } catch (error) {
       console.log(error); 
+      alert('Invalid email or password');
     }
   };
     return (
