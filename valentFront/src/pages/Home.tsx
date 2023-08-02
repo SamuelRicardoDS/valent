@@ -3,7 +3,7 @@ import { CarpeWomanComponent } from "../components/home/CarpeWomanComponent";
 import { Header } from "../components/Header";
 import { HomeContent } from "../components/home/HomeContent";
 
-const Home = () => {
+export const Home = () => {
     return (
         <div>
             <Header />
@@ -13,5 +13,3 @@ const Home = () => {
         </div>
     );
 }
-
-export { Home };

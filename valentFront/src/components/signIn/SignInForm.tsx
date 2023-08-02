@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { api } from '../../services/api';
+import { useNavigate } from "react-router-dom";
 
 const SignUpFormContainer = styled.form`
   position: fixed;
@@ -43,6 +44,7 @@ export const SignInForm = () => {
       setPassword(value);
     }
   }
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,8 +58,10 @@ export const SignInForm = () => {
       const token = response.data.token;
       localStorage.setItem('token', token);
       console.log(response.data); 
+      navigate('/main');
     } catch (error) {
       console.log(error); 
+      alert('Invalid email or password');
     }
   };
     return (
