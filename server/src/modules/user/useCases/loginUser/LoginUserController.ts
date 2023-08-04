@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { LoginUserUseCase } from "./LoginUserUseCase";
+import { ILoginUserResponse } from "./LoginUserUseCase";
 
 class LoginUserController {
   constructor(private loginUserUseCase: LoginUserUseCase) {}
@@ -8,7 +9,7 @@ class LoginUserController {
     try {
       const { email, password } = req.body;
 
-      const token = await this.loginUserUseCase.execute({ email, password })
+      const { token }: ILoginUserResponse = await this.loginUserUseCase.execute({ email, password })
       
       return res.json({ token });
     } catch (error) {

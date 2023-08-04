@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { api } from '../../services/api';
 import { useNavigate } from "react-router-dom";
+import jwt_decode from 'jwt-decode';
+
 
 const SignUpFormContainer = styled.form`
   position: fixed;
@@ -57,8 +59,16 @@ export const SignInForm = () => {
       const response = await api.post('/user/sign-in', data);
       const token = response.data.token;
       localStorage.setItem('token', token);
-      console.log(response.data); 
-      navigate('/main');
+      console.log({token: response.data.token}); 
+
+      try {
+        const decodedToken = jwt_decode(token) as { userId: string };
+        const userId = decodedToken.userId;
+        console.log(userId);
+        navigate(`/main/${userId}`);
+      } catch (error) {
+        console.error('Erro ao decodificar o token:', error);
+      }
     } catch (error) {
       console.log(error); 
       alert('Invalid email or password');

@@ -5,11 +5,10 @@ import { SignUp } from "./pages/SignUp";
 import { SignIn } from "./pages/SignIn";
 
 export const Routes = () => {
-  const token = localStorage.getItem('token');
   return (
     <ValentRoutes>
       <Route path="/" Component={Home} />
-      <Route path="/main" Component={token ? Main : SignIn} />
+      <Route path="/main/:userId" Component={Main} />
       <Route path="/user/sign-up" Component={SignUp} />
       <Route path="/user/sign-in" Component={SignIn} />
     </ValentRoutes>
