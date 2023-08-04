@@ -7,12 +7,16 @@ interface ILoginUserDTO {
   password: string;
 }
 
+export interface ILoginUserResponse {
+  token: string;
+}
+
 class LoginUserUseCase {
   constructor(
     private userRepository: IUserRepository
   ) {}
   
-  async execute(data: ILoginUserDTO) {
+  async execute(data: ILoginUserDTO): Promise<ILoginUserResponse>{
     const { email, password } = data;
 
     const user = await this.userRepository.findByEmail(email);
@@ -29,7 +33,7 @@ class LoginUserUseCase {
 
     const token = generateAuthToken(user.id);
 
-    return token;
+    return { token };
   }
 
 }

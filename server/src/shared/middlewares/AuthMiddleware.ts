@@ -2,7 +2,11 @@ import { Request, Response, NextFunction } from 'express';
 import { passport } from '../../services/passport';
 import jwt from 'jsonwebtoken';
 
-const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+interface AuthenticatedRequest extends Request {
+  userId?: string; // Defina a propriedade userId como opcional e do tipo string
+}
+
+const authMiddleware = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   passport.authenticate('local', (err, user, info) => {
     if (err || !user) {
       return res.status(401).json({ error: 'Falha na autenticação.' });
@@ -19,10 +23,10 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     }
 
     try {
-      const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-      if (decodedToken.exp < Date.now() / 1000) {
-        return res.status(401).json({ error: 'Token expirado. Faça login novamente.' });
-      }
+      const decodedToken = jwt.verify(token, process.env.SECRET_KEY) as { userId: string };
+
+      req.userId = decodedToken.userId;
+
       next();
     } catch (error) {
       return res.status(401).json({ error: 'Token de autenticação inválido.' });
