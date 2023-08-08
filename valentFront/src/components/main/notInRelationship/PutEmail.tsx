@@ -12,17 +12,44 @@ const FormSendEmail = styled.form`
     display: flex;
     flex-direction: column;
     `
-  
 
+const TitleSendEmail = styled.h1`
+text-align: center;
+`
+const SubTitleSendEmail = styled.h2`
+    margin-top: 0%;
+    text-align: center;
+`
+
+const InputPairEmail = styled.input`
+    width: 60%;
+    font-size: large;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    padding: 1%;
+    margin-left: 20%;
+`
+const SendEmailButton = styled.button`
+    width: 32%;
+    height: 50px;
+    font-size: large;
+    background-color: #787878;
+    border: none;
+    border-radius: 30px;
+    margin-top: 2%;
+    margin-left: 34%;
+`
+  
 
 export const PutEmail = () => {
     return (
         <Container>
-            <h1>put your pair email and send your code </h1>
-            <h2>add your pair</h2>
+            <TitleSendEmail>put your pair email and send your code </TitleSendEmail>
+            <SubTitleSendEmail>add your pair</SubTitleSendEmail>
           <FormSendEmail>
-            <input type="email" name="" id="" placeholder="your pair email"/>
-            <button>send your code</button>
+            <InputPairEmail type="email" name="" id="" placeholder="your pair email"/>
+            <SendEmailButton>send your code</SendEmailButton>
           </FormSendEmail>
         </Container>
     );
