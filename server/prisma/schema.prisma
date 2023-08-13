@@ -11,8 +11,19 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  email    String @unique
-  name     String
-  password String
+  id                       String        @id @default(uuid())
+  email                    String        @unique
+  name                     String
+  password                 String
+  relationshipAsPartnerOne Relationship? @relation("PartnerOne")
+  relationshipAsPartnerTwo Relationship? @relation("PartnerTwo")
+}
+
+model Relationship {
+  id           String   @id @default(uuid())
+  partnerOne   User     @relation("PartnerOne", fields: [partnerOneId], references: [id])
+  partnerOneId String   @unique
+  partnerTwo   User     @relation("PartnerTwo", fields: [partnerTwoId], references: [id])
+  partnerTwoId String   @unique
+  startDate    DateTime
 }
