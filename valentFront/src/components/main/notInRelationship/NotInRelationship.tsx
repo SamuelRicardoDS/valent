@@ -1,10 +1,11 @@
-import { Header } from "../Header"
+import { Header } from "../../Header"
+import { PutEmail } from "./PutEmail";
 
 export const NotInRelationship = () => {
     return (
         <div>
           <Header/>
-            <h1>not in relationship</h1>
+          <PutEmail />
         </div>
     );
 }

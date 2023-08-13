@@ -33,6 +33,7 @@ userRoutes.post('/sign-in', async (request, response) => {
   }
 });
 
-userRoutes.get('/main', authMiddleware, (request, response) => {
-  response.render('main');
+userRoutes.get('/main/:userId', authMiddleware, (request, response) => {
+  
+  response.render('main', { userId: request.params.userId });
 });
