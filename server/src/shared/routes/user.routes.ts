@@ -13,7 +13,6 @@ const prismaUserRepository = new PrismaUserRepository();
 const createUserUseCase = new CreateUserUseCase(prismaUserRepository);
 const createUserController = new CreateUserController(createUserUseCase);
 
-
 const loginUserUseCase = new LoginUserUseCase(prismaUserRepository);
 const loginUserController = new LoginUserController(loginUserUseCase);
 
