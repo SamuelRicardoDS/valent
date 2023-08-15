@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import { passport } from '../../services/passport';
 import jwt from 'jsonwebtoken';
 
-interface AuthenticatedRequest extends Request {
-  userId?: string; // Defina a propriedade userId como opcional e do tipo string
+export interface AuthenticatedRequest extends Request {
+  userId?: string; 
 }
 
 const authMiddleware = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
