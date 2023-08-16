@@ -15,6 +15,7 @@ model User {
   email                    String        @unique
   name                     String
   password                 String
+  pairEmail                String?
   relationshipAsPartnerOne Relationship? @relation("PartnerOne")
   relationshipAsPartnerTwo Relationship? @relation("PartnerTwo")
 }
