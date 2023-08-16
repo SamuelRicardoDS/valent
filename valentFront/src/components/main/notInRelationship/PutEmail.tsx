@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState } from "react";
+import { api } from "../../../services/api";
 
 const Container = styled.div`
     display: flex;
@@ -12,17 +14,63 @@ const FormSendEmail = styled.form`
     display: flex;
     flex-direction: column;
     `
-  
 
+const TitleSendEmail = styled.h1`
+    text-align: center;
+`
+const SubTitleSendEmail = styled.h2`
+    margin-top: 0%;
+    font-weight: lighter;
+    text-align: center;
+`
+
+const InputPairEmail = styled.input`
+    width: 60%;
+    font-size: large;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    padding: 1%;
+    margin-left: 20%;
+`
+const SendEmailButton = styled.button`
+    width: 32%;
+    height: 50px;
+    font-size: large;
+    background-color: #787878;
+    border: none;
+    border-radius: 30px;
+    margin-top: 2%;
+    margin-left: 34%;
+`
 
 export const PutEmail = () => {
+    const [pairEmail, setPairEmail] = useState("");
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPairEmail(e.target.value);
+    }
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(pairEmail);
+        api.post('/user/send-pairemail', pairEmail);
+    }
+
     return (
         <Container>
-            <h1>put your pair email and send your code </h1>
-            <h2>add your pair</h2>
-          <FormSendEmail>
-            <input type="email" name="" id="" placeholder="your pair email"/>
-            <button>send your code</button>
+            <TitleSendEmail>put your pair email and send your code </TitleSendEmail>
+            <SubTitleSendEmail>add your pair</SubTitleSendEmail>
+          <FormSendEmail onSubmit={handleSubmit}>
+            <InputPairEmail 
+            type="email"
+            name="" 
+            id="" 
+            placeholder="your pair email"
+            value={pairEmail}
+            onChange={handleChange}
+            />
+            <SendEmailButton type="submit">confirm</SendEmailButton>
           </FormSendEmail>
         </Container>
     );
