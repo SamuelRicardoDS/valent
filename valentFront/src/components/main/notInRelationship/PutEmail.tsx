@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState } from "react";
+import { api } from "../../../services/api";
 
 const Container = styled.div`
     display: flex;
@@ -14,10 +16,11 @@ const FormSendEmail = styled.form`
     `
 
 const TitleSendEmail = styled.h1`
-text-align: center;
+    text-align: center;
 `
 const SubTitleSendEmail = styled.h2`
     margin-top: 0%;
+    font-weight: lighter;
     text-align: center;
 `
 
@@ -40,16 +43,34 @@ const SendEmailButton = styled.button`
     margin-top: 2%;
     margin-left: 34%;
 `
-  
 
 export const PutEmail = () => {
+    const [pairEmail, setPairEmail] = useState("");
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPairEmail(e.target.value);
+    }
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(pairEmail);
+        api.post('/user/send-pairemail', pairEmail);
+    }
+
     return (
         <Container>
             <TitleSendEmail>put your pair email and send your code </TitleSendEmail>
             <SubTitleSendEmail>add your pair</SubTitleSendEmail>
-          <FormSendEmail>
-            <InputPairEmail type="email" name="" id="" placeholder="your pair email"/>
-            <SendEmailButton>send your code</SendEmailButton>
+          <FormSendEmail onSubmit={handleSubmit}>
+            <InputPairEmail 
+            type="email"
+            name="" 
+            id="" 
+            placeholder="your pair email"
+            value={pairEmail}
+            onChange={handleChange}
+            />
+            <SendEmailButton type="submit">confirm</SendEmailButton>
           </FormSendEmail>
         </Container>
     );

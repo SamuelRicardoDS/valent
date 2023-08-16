@@ -1,5 +1,5 @@
 import { Header } from "../../Header"
-import { PutCode } from "./PutCode";
+import { Content } from "./Content";
 import { PutEmail } from "./PutEmail";
 
 export const NotInRelationship = () => {
@@ -7,7 +7,7 @@ export const NotInRelationship = () => {
         <div>
           <Header/>
           <PutEmail />
-          <PutCode />
+          <Content />
         </div>
     );
 }
