@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { api } from "../../../services/api";
+import { useParams } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -50,11 +51,12 @@ export const PutEmail = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPairEmail(e.target.value);
     }
-
+    
+    const { userId } = useParams();
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(pairEmail);
-        api.post('/user/send-pairemail', pairEmail);
+        api.patch(`/main/send-pairemail/${userId}`, pairEmail);
     }
 
     return (
