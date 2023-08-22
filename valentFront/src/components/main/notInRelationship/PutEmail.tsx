@@ -53,10 +53,13 @@ export const PutEmail = () => {
     }
     
     const { userId } = useParams();
+    const data = {
+        pairEmail: pairEmail
+    }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(pairEmail);
-        api.patch(`/main/send-pairemail/${userId}`, pairEmail);
+        console.log(data);
+        api.patch(`/main/send-pairemail/${userId}`, data);
     }
 
     return (

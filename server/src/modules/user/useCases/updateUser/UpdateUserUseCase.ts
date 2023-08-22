@@ -20,8 +20,18 @@ class UpdateUserUseCase {
     }
 
     await this.userRepository.update(id, name, email, password, pairEmail)
+  }
 
-  } 
+  async updatePairEmail(userId: string, pairEmail: string): Promise<void> {
+ 
+    const user = await this.userRepository.findById(userId);
+
+    if (!user) {
+      throw new Error("User not exist");
+    }
+
+    await this.userRepository.updatePairEmail(userId, pairEmail);
+  }
 }
 
 export { UpdateUserUseCase }

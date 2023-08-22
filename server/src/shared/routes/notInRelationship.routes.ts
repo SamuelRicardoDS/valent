@@ -12,10 +12,13 @@ export const notInRelationshipRoutes = Router();
 
 notInRelationshipRoutes.patch('/send-pairemail/:userId', async (request, response) => {
   try {
-    const { pairEmail } = request.body
-    return updateUserController.handle(request, response);
+    const userId = request.params.userId;
+    const { pairEmail } = request.body;
+   
+    await updateUserController.updatePairEmail(userId, pairEmail);
+    return response.status(200).send({ message: "Pair email sent" });
   } catch (error) {
-    console.error("Error updating pair email:", error);
-    return response.status(500).send({ message: "Failed to update pair email" });
+    console.error("Error updating user:", error);
+    return response.status(500).send({ message: "Failed to update user" });
   }
-})
+});
