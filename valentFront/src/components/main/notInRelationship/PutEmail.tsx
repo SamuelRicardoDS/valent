@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { api } from "../../../services/api";
+import { useParams } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -14,7 +15,6 @@ const FormSendEmail = styled.form`
     display: flex;
     flex-direction: column;
     `
-
 const TitleSendEmail = styled.h1`
     text-align: center;
 `
@@ -23,7 +23,6 @@ const SubTitleSendEmail = styled.h2`
     font-weight: lighter;
     text-align: center;
 `
-
 const InputPairEmail = styled.input`
     width: 60%;
     font-size: large;
@@ -43,18 +42,25 @@ const SendEmailButton = styled.button`
     margin-top: 2%;
     margin-left: 34%;
 `
-
 export const PutEmail = () => {
     const [pairEmail, setPairEmail] = useState("");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPairEmail(e.target.value);
     }
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    
+    const { userId } = useParams();
+    const data = {
+        pairEmail: pairEmail
+    }
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(pairEmail);
-        api.post('/user/send-pairemail', pairEmail);
+        try {
+            console.log(data);
+            await api.patch(`/main/send-pairemail/${userId}`, data);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (

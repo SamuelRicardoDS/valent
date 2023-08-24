@@ -22,9 +22,6 @@ userRoutes.post('/sign-up', (request, response) => {
 
 userRoutes.post('/sign-in', async (request, response) => {
   try {
-    const { email, password } = request.body;
-    const token = await loginUserUseCase.execute({ email, password });
-
     return loginUserController.handle(request, response);
   } catch (error) {
     console.log(error);
