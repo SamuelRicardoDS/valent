@@ -58,7 +58,6 @@ export const PutEmail = () => {
         try {
             console.log(data);
             await api.patch(`/main/send-pairemail/${userId}`, data);
-            const response = await api.get(`/main/check-relationship/${userId}`);
         } catch (error) {
             console.error(error);
         }

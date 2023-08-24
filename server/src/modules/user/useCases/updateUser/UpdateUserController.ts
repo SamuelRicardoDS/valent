@@ -25,6 +25,7 @@ class UpdateUserController {
 
       const user = await this.userRepository.findById(userId);
       const userOfPairEmail = await this.userRepository.findByEmail(pairEmail);
+
       if (!userOfPairEmail || !user) {
         throw new Error("User not found");
       }

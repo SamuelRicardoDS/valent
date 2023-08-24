@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { CreateRelationshipUseCase } from './CreateRelationshipUseCase';
 import { AuthenticatedRequest } from '../../../../shared/middlewares/AuthMiddleware';
 class CreateRelationshipController {
@@ -10,13 +10,17 @@ class CreateRelationshipController {
 
   async handle(req: AuthenticatedRequest, res: Response): Promise<Response> {
     try {
-      const { startDate, partnerOne, partnerTwo, partnerTwoId } = req.body;
+      const { startDate, partnerTwoId } = req.body;
+      if(!startDate || !partnerTwoId){
+        return res.status(400).send();
+      }
+      if(!req.userId){
+        return res.status(401).send({message: "User Id missing"});
+      }
       const partnerOneId = req.userId
 
       await this.createRelationshipUseCase.execute({
-        partnerOne,
         partnerOneId,
-        partnerTwo,
         partnerTwoId,
         startDate
       })
