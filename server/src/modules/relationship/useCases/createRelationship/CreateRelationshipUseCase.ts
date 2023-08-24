@@ -3,7 +3,7 @@ import { ICreateRelationshipDTO } from "../../dtos/ICreateRelationshipDTO";
 
 class CreateRelationshipUseCase {
   constructor(
-    private relationshipRepository: IRelationshipRepository
+    private relationshipRepository: IRelationshipRepository,
   ) {}
   
   async execute(data: ICreateRelationshipDTO): Promise<void> {

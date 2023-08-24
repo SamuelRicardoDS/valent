@@ -15,7 +15,6 @@ const FormSendEmail = styled.form`
     display: flex;
     flex-direction: column;
     `
-
 const TitleSendEmail = styled.h1`
     text-align: center;
 `
@@ -24,7 +23,6 @@ const SubTitleSendEmail = styled.h2`
     font-weight: lighter;
     text-align: center;
 `
-
 const InputPairEmail = styled.input`
     width: 60%;
     font-size: large;
@@ -44,7 +42,6 @@ const SendEmailButton = styled.button`
     margin-top: 2%;
     margin-left: 34%;
 `
-
 export const PutEmail = () => {
     const [pairEmail, setPairEmail] = useState("");
 
@@ -56,10 +53,15 @@ export const PutEmail = () => {
     const data = {
         pairEmail: pairEmail
     }
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(data);
-        api.patch(`/main/send-pairemail/${userId}`, data);
+        try {
+            console.log(data);
+            await api.patch(`/main/send-pairemail/${userId}`, data);
+            const response = await api.get(`/main/check-relationship/${userId}`);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
