@@ -1,12 +1,18 @@
+import { useEffect } from "react";
 import { InRelationship } from "../components/main/inRelationship/InRelationship";
 import { NotInRelationship } from "../components/main/notInRelationship/NotInRelationship";
+import { useRelationship } from "../context/RelationshipContext";
 
 
 export const Main = () => {
-    const isInRelationship = false;
+    const { isUserInRelationship, updateRelationshipStatus } = useRelationship();
+    useEffect(() => {
+        updateRelationshipStatus(false);
+    }, [])
+    
     return (
         <div>
-            {isInRelationship ? <InRelationship /> : <NotInRelationship />}
+            {isUserInRelationship ? <InRelationship /> : <NotInRelationship />}
         </div>
     )
 }

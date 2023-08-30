@@ -5,6 +5,7 @@ export const InRelationship = () => {
     <div>
       <Header/>
       <h1>in relationship</h1>
+      <h2>APARECE QUE EU GRITOOOOOOOOOOOOOOOOOOO</h2>
     </div>
   )
 }
