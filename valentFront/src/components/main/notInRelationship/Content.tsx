@@ -27,6 +27,7 @@ const Status = styled.div`
   border-radius: 10px;
   padding: 1%;
   background-color: #787878;
+  justify-content: center;
 `
 const StatusText = styled.p`
   text-align: center;

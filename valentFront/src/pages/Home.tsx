@@ -4,6 +4,7 @@ import { Header } from "../components/Header";
 import { HomeContent } from "../components/home/HomeContent";
 
 export const Home = () => {
+    
     return (
         <div>
             <Header />

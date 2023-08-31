@@ -26,3 +26,17 @@ notInRelationshipRoutes.patch('/send-pairemail/:userId', async (request, respons
     return response.status(500).send({ message: "Failed to update user" });
   }
 });
+
+notInRelationshipRoutes.get('/check-relationship/:userId', async (request, response) => {
+  try {
+    const userId = request.params.userId;
+    const relationship = await prismaRelationshipRepository.findByPartnerId(userId);
+    if (relationship) {
+      response.status(200).send({ message: "User is in a relationship" });
+    } else {
+      response.status(200).send({ message: "User is not in a relationship" });
+    }
+  } catch (error) {
+    response.status(500).send({ message: "Failed to check relationship" });
+  }
+});

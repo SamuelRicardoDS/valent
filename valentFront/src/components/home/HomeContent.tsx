@@ -27,6 +27,12 @@ const SignUpButton = styled.button`
   width: 7%;
   height: 5%;
   border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #787878;
+  :hover{
+    background-color: #454545;
+  }
 `;
 
 

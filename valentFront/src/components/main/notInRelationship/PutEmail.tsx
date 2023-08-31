@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { api } from "../../../services/api";
 import { useParams } from "react-router-dom";
+import { useRelationship } from "../../../context/RelationshipContext";
 
 const Container = styled.div`
     display: flex;
@@ -44,20 +45,37 @@ const SendEmailButton = styled.button`
 `
 export const PutEmail = () => {
     const [pairEmail, setPairEmail] = useState("");
+    const [isUserInRelationship, setIsUserInRelationship] = useState(false);
+    const { updateRelationshipStatus } = useRelationship();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPairEmail(e.target.value);
     }
     
     const { userId } = useParams();
+
     const data = {
         pairEmail: pairEmail
     }
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             console.log(data);
             await api.patch(`/main/send-pairemail/${userId}`, data);
+
+            const response = await api.get(`/main/check-relationship/${userId}`);
+            const relationshipStatus = response.data.message;
+            console.log(relationshipStatus);
+            if(relationshipStatus === "User is in a relationship") {
+                setIsUserInRelationship(true);
+                updateRelationshipStatus(true);
+                console.log("User is in a relationship")
+            } else {
+                setIsUserInRelationship(false);
+                updateRelationshipStatus(false);
+                console.log("User is not in a relationship")
+            }
         } catch (error) {
             console.error(error);
         }
