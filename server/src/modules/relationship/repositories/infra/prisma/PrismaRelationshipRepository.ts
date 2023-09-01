@@ -12,10 +12,13 @@ class PrismaRelationshipRepository implements IRelationshipRepository {
       return relationship;
     }
 
-    async findByPartnerId(userOneId: string): Promise<Relationship | null> {
-        const relationship = await prisma.relationship.findUnique({
+    async findByPartnerId(userId: string): Promise<Relationship | null> {
+        const relationship = await prisma.relationship.findFirst({
           where: {
-            partnerOneId: userOneId
+            OR: [
+              {partnerOneId: userId},
+              {partnerTwoId: userId}
+            ]
           }
         })
         return relationship;

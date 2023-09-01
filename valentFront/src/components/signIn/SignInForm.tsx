@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { api } from '../../services/api';
 import { useNavigate } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
+import { useRelationship } from '../../context/RelationshipContext';
 
 
 const SignUpFormContainer = styled.form`
@@ -46,7 +47,8 @@ export const SignInForm = () => {
       setPassword(value);
     }
   }
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const { setUserId } = useRelationship() 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -65,6 +67,7 @@ export const SignInForm = () => {
         const decodedToken = jwt_decode(token) as { userId: string };
         const userId = decodedToken.userId;
         console.log(userId);
+        setUserId(userId)
         navigate(`/main/${userId}`);
       } catch (error) {
         console.error('Erro ao decodificar o token:', error);

@@ -63,19 +63,8 @@ export const PutEmail = () => {
         try {
             console.log(data);
             await api.patch(`/main/send-pairemail/${userId}`, data);
-
-            const response = await api.get(`/main/check-relationship/${userId}`);
-            const relationshipStatus = response.data.message;
-            console.log(relationshipStatus);
-            if(relationshipStatus === "User is in a relationship") {
-                setIsUserInRelationship(true);
-                updateRelationshipStatus(true);
-                console.log("User is in a relationship")
-            } else {
-                setIsUserInRelationship(false);
-                updateRelationshipStatus(false);
-                console.log("User is not in a relationship")
-            }
+            
+            await updateRelationshipStatus();
         } catch (error) {
             console.error(error);
         }

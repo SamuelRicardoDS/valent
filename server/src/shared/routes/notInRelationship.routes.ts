@@ -33,10 +33,13 @@ notInRelationshipRoutes.get('/check-relationship/:userId', async (request, respo
     const relationship = await prismaRelationshipRepository.findByPartnerId(userId);
     if (relationship) {
       response.status(200).send({ message: "User is in a relationship" });
+      console.log("User is in a relationship");
     } else {
       response.status(200).send({ message: "User is not in a relationship" });
+      console.log("User is not in a relationship");
     }
   } catch (error) {
     response.status(500).send({ message: "Failed to check relationship" });
+    console.error("Failed to check relationship:", error);
   }
 });
