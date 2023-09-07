@@ -27,4 +27,15 @@ model Relationship {
   partnerTwo   User     @relation("PartnerTwo", fields: [partnerTwoId], references: [id])
   partnerTwoId String   @unique
   startDate    DateTime
+  Events Event[]
+}
+
+model Event {
+  id             String       @id @default(uuid())
+  name           String
+  date           DateTime
+  description    String?
+  location       String?
+  relationshipId String
+  relationship   Relationship @relation(fields: [relationshipId], references: [id])
 }

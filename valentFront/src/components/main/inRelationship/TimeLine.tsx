@@ -27,17 +27,24 @@ const Circle = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 30px;
-  background-color: black;
+  background-color: white;
 `;
 
 const Line = styled.div`
   flex-grow: 1;
   width: 10px;
   height: 70px;
-  background-color: black; 
+  background-color: white; 
   margin: 2%;
 `;
-
+const CreateEventButton = styled.button`
+  width: 30%;
+  height: 50px;
+  border: none;
+  border-radius: 20px;
+  background-color: white;
+  font-size: large;
+`;
 export const TimeLine = () => {
   const events = [
     { text: 'Evento 1' },
@@ -47,7 +54,6 @@ export const TimeLine = () => {
 
   return (
     <Container>
-      <h1>TimeLine</h1>
         {events.map((event, index) => (
       <EventContainer>
           <TimelineItem key={index}>
@@ -56,6 +62,7 @@ export const TimeLine = () => {
             <Line />
         </EventContainer>
         ))}
+        <CreateEventButton> adicionar evento </CreateEventButton>
     </Container>
   );
 };
