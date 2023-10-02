@@ -3,6 +3,7 @@ import { PartnersInfos } from "./PartnersInfos"
 import { TimeLine } from "./TimeLine"
 
 export const InRelationship = () => {
+  
   return (
     <div>
       <Header/>
