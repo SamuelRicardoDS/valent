@@ -2,12 +2,33 @@ import { Relationship } from "@prisma/client";
 import { ICreateRelationshipDTO } from "../../../dtos/ICreateRelationshipDTO";
 import { IRelationshipRepository } from "../../IRelationshipRepository";
 import { prisma } from "../../../../../services/prisma"
+import { PrismaUserRepository }  from "../../../../user/repositories/infra/prisma/PrismaUserRepository"
 
+const prismaUserRepository = new PrismaUserRepository();
 class PrismaRelationshipRepository implements IRelationshipRepository {
 
     async create(data: ICreateRelationshipDTO): Promise<Relationship> {
       const relationship = await prisma.relationship.create({
         data
+      });
+      const partnerOne = await prismaUserRepository.findById(data.partnerOneId);
+      const partnerTwo = await prismaUserRepository.findById(data.partnerTwoId);
+      
+      await prisma.user.update({
+        where: {
+          id: partnerOne?.id
+        },
+        data: {
+          partnerId: partnerTwo?.id
+        }
+      });
+      await prisma.user.update({
+        where: {
+          id: partnerTwo?.id
+        },
+        data: {
+          partnerId: partnerOne?.id
+        }
       });
       return relationship;
     }

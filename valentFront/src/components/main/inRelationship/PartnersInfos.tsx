@@ -23,6 +23,17 @@ const PartnerOneContainer = styled.div`
     border-radius: 150px;
     background-color: antiquewhite;
 `;
+const PartnerTwoContainer = styled.div`
+    margin-top: 10%;
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+    background-color: antiquewhite;
+`;
 const PartnerInfos = styled.div`
     display: flex;
     position: fixed;
@@ -36,8 +47,8 @@ interface User {
     name: string,
     email: string,
     password: string,
-    createdAt: string,
-    updatedAt: string,
+    pairEmail: string,
+    partnerId: number,
     relationship: {
         id: number,
         status: string,
@@ -47,15 +58,21 @@ interface User {
         updatedAt: string
     }
 }
+
 export const PartnersInfos = () => {
-    const [userData, setUserData] = useState<User | null>(null)
+    const [userOneData, setUserOneData] = useState<User | null>(null)
+    const [userTwoData, setUserTwoData] = useState<User | null>(null)
     const { userId } = useParams()
 
     async function getPartnerInfos() {
         try {
             const response = await api.get(`/main/read-user/${userId}`)
-            console.log(response.data.user)
-            setUserData(response.data.user)
+            setUserOneData(response.data.user)
+            if(userOneData?.partnerId === null) return
+            console.log(`partnerId: ${userOneData?.partnerId}`)
+            const responseUserTwo = await api.get(`main/read-user/${userOneData?.partnerId}`)
+            console.log(responseUserTwo)
+            setUserTwoData(responseUserTwo.data.user)
         } catch (error) {
             console.log(error)
         }
@@ -69,10 +86,16 @@ export const PartnersInfos = () => {
         <Container>
             <PartnerOneContainer>
                 <PartnerInfos>
-                    <h1>{userData?.name}</h1>
-                    <h2>{userData?.email}</h2>
+                    <h1>{userOneData?.name}</h1>
+                    <h2>{userOneData?.email}</h2>
                 </PartnerInfos>
             </PartnerOneContainer>
+            <PartnerTwoContainer>
+                <PartnerInfos>
+                    <h1>{userTwoData?.name}</h1>
+                    <h2>{userTwoData?.email}</h2>
+                </PartnerInfos>
+            </PartnerTwoContainer>
         </Container>
     )
 }

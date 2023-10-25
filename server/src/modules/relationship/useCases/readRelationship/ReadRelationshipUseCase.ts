@@ -13,6 +13,15 @@ class ReadRelationshipUseCase {
 
     return relationship;
   }
+  async executeByUserId(userId: string): Promise<Relationship> {
+    const relationship = await this.relationshipRepository.findByPartnerId(userId);
+
+    if (!relationship) {
+      throw new Error('Relationship not found for user');
+    }
+
+    return relationship;
+  }
 }
 
 export { ReadRelationshipUseCase }
